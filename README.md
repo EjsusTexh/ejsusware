@@ -7,9 +7,12 @@
 
 ## Features
 
-- **3D block-style `EJSUSWARE` title** — rendered with a horizontal color gradient and a drop shadow
-- Classic "malware toolkit" style main menu with **5 panels** (1-5)
-- Animated fake progress bars and randomized fake stats for every panel
+- **3D block-style `EJSUSWARE` title** — horizontal color gradient + drop shadow, revealed row-by-row
+- **Fake boot sequence** — module checks, progress bar, operator handle, "ACCESS GRANTED"
+- Classic "malware toolkit" main menu with **5 panels**, each with its own **sub-menu**
+- Timestamped fake logs, animated progress bars, random **hex dumps** and stats tables
+- **Interactive fake remote shell** (RAT panel) — `help`, `sysinfo`, `whoami`, `ls`, `ps`, `shot`
+- **Live fake keystroke stream** (Keylogger panel) — random keys, Ctrl+C stops early
 - Works on any terminal with ANSI support (Windows Terminal / CMD on Win10+, all Linux terminals)
 - No third-party packages — pure Python standard library
 
@@ -22,7 +25,7 @@
 ### Linux
 
 ```bash
-git clone https://github.com/<your-username>/ejsusware.git
+git clone https://github.com/EjsusTexh/ejsusware.git
 cd ejsusware
 python3 ejsusware.py
 ```
@@ -30,30 +33,46 @@ python3 ejsusware.py
 ### Windows
 
 ```powershell
-git clone https://github.com/<your-username>/ejsusware.git
+git clone https://github.com/EjsusTexh/ejsusware.git
 cd ejsusware
 python ejsusware.py
 ```
 
 ## Usage
 
-- Select a panel with keys `1` – `5`
-- Press `0` (or `q`) to exit
-- Each panel runs a simulated animation and returns to the menu with `Enter`
+- Select a panel with keys `1` – `5`, then pick a sub-option
+- Press `0` to go back or exit
+- Each simulation runs fake animations and returns with `Enter`
 
 ## Panels (UI only)
 
-| Key | Panel               | Simulated content                     |
-|-----|---------------------|---------------------------------------|
-| 1   | DDoS Engine         | flood loop, bot nodes, requests/s     |
-| 2   | Ransomware Builder  | session key, payload packing          |
-| 3   | Keylogger           | input hooks, silent capture           |
-| 4   | Credential Stealer  | browser scan, credential dump         |
-| 5   | RAT Controller      | listener, beacon, remote shell        |
+| Key | Panel               | Sub-options                                                        |
+|-----|---------------------|--------------------------------------------------------------------|
+| 1   | DDoS Engine         | TCP SYN Flood · UDP Flood · HTTP Layer-7 Flood · Slowloris         |
+| 2   | Ransomware Builder  | Quick Build · Stealth Build · Custom Config (note + BTC amount)    |
+| 3   | Keylogger           | Start Capture (live stream) · View Buffer (hex dump) · Exfiltrate  |
+| 4   | Credential Stealer  | Scan Browsers · Dump Cookies · Grab Wallets                        |
+| 5   | RAT Controller      | Open Listener · List Beacons · Interact (fake shell)               |
 
 ## Preview
 
 ```
+  EJSUSWARE CORE BOOTLOADER v2.0.0
+  ──────────────────────────────────────────────────────────
+
+  [OK] core kernel module     v2.0.1
+  [OK] crypto engine          AES-256 [SIM]
+  [OK] packet forge layer     loaded
+  [OK] stealth engine         hidden
+  [OK] ui renderer            active
+  [WRN] real payloads          none found
+
+  initializing core modules
+  [██████████████████] 100%
+
+  operator handle [Enter = operator]:
+  [*] ACCESS GRANTED — welcome back, root.
+
 █████    ███   ████  █   █   ████  █   █   ███   ████   █████
 █░░░░░    █░░ █ ░░░░ █░  █░ █ ░░░░ █░  █░ █ ░░█  █░░░█  █░░░░░
 █░        █░  █░     █░  █░ █░     █░  █░ █░  █░ █░  █░ █░
@@ -61,8 +80,6 @@ python ejsusware.py
 █░░░░     █░    ░░█  █░  █░   ░░█  █░█░█░ █░░░█░ █░█░░  █░░░░
 █░     █  █░      █░ █░  █░     █░ █░█░█░ █░  █░ █░ █   █░
 █████   ██ ░  ████ ░  ███ ░ ████ ░  █ █ ░ █░  █░ █░  █  █████
-
-  v1.0.0 · UI-ONLY TERMINAL · LINUX / WINDOWS / macOS
 
  ╔══════════════════════════════════════════════════════════╗
  ║                    EJSUSWARE MAIN MENU                     ║
@@ -82,9 +99,9 @@ python ejsusware.py
 
 ## Environment variables
 
-| Variable      | Effect                            |
-|---------------|-----------------------------------|
-| `NO_COLOR=1`  | Disable all colors                |
+| Variable        | Effect                            |
+|-----------------|-----------------------------------|
+| `NO_COLOR=1`    | Disable all colors                |
 | `FORCE_COLOR=1` | Force colors when output is piped |
 
 ## License
